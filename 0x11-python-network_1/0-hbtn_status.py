@@ -5,12 +5,10 @@
 """
 
 
-if __name__ == '__main__':
-    import urllib.request
+from urllib.request import urlopen
+import json
 
-    with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as res:
-        content = res.read()
-        print("Body response:")
-        print("\t- type: {}".format(type(content)))
-        print("\t- content: {}".format(content))
-        print("\t- utf8 content: {}".format(content.decode('utf-8')))
+with urlopen("https://alx-intranet.hbtn.io/status") as response:
+    data = json.loads(response.read().decode())
+    for key, value in data.items():
+        print("\t- " + key + ": " + value)
